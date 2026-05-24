@@ -46,6 +46,24 @@ const dataStructure = [
     longDescription: 'Delve into the world of trees and graphs...',
     image:demo2
   },
+  {
+    id: 9,
+    title: 'Trees',
+    description: 'Explore hierarchical structures like Binary Trees, BSTs, and Heaps.',
+    longDescription: 'Visualize hierarchical relationships and recursive structures...'
+  },
+  {
+    id: 10,
+    title: 'Dynamic Programming',
+    description: 'Solve complex problems by breaking them into overlapping subproblems.',
+    longDescription: 'Master the art of memoization and tabulation...'
+  },
+  {
+    id: 11,
+    title: 'Greedy Algorithms',
+    description: 'Learn to make the locally optimal choice at each stage.',
+    longDescription: 'Explore algorithms like Huffman Coding and Kruskal’s...'
+  }
 ];
 
 export default function COURSES() {

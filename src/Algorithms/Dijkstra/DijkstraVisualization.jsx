@@ -1,5 +1,5 @@
-import { useRef, useEffect, useState } from 'react';
-import '../../Stylesheets/Dijkstra.module.css' // Ensure you have your styles imported
+import React, { useRef, useEffect, useState } from 'react';
+import '../../Stylesheets/Dijkstra.module.css'; // Ensure you have your styles imported
 import ContentSwitcher from './ContentSwitcher';
 
 const DijkstraVisualization = () => {
@@ -56,15 +56,31 @@ const DijkstraVisualization = () => {
         const ctx = ctxRef.current;
         ctx.beginPath();
         ctx.arc(position.x, position.y, 20, 0, 2 * Math.PI);
-        ctx.fillStyle = finalPath.includes(node) ? 'green' : 'white';
+        
+        if (finalPath.includes(node)) {
+            ctx.fillStyle = '#66FCF1'; // Neon Cyan
+            ctx.shadowBlur = 15;
+            ctx.shadowColor = '#66FCF1';
+        } else if (visitedNodes.has(node)) {
+            ctx.fillStyle = '#aa00ff'; // Neon Purple
+            ctx.shadowBlur = 15;
+            ctx.shadowColor = '#aa00ff';
+        } else {
+            ctx.fillStyle = '#1f2833'; // Dark Node
+            ctx.shadowBlur = 0;
+        }
         ctx.fill();
-        ctx.strokeStyle = 'black';
+        
+        ctx.strokeStyle = 'rgba(255, 255, 255, 0.3)';
+        ctx.lineWidth = 2;
         ctx.stroke();
-        ctx.fillStyle = 'black';
+
+        ctx.shadowBlur = 0; // Reset shadow for text
+        ctx.fillStyle = '#ffffff';
         ctx.textAlign = 'center';
         ctx.textBaseline = 'middle';
-        ctx.font = '16px Arial';
-        ctx.fillText(node, position.x, position.y);
+        ctx.font = 'bold 16px Outfit, sans-serif';
+        ctx.fillText(node.toUpperCase(), position.x, position.y);
     };
 
     const drawEdge = (node1, node2, weight) => {
@@ -76,23 +92,37 @@ const DijkstraVisualization = () => {
         ctx.lineTo(pos2.x, pos2.y);
 
         if (isEdgeInFinalPath(node1, node2)) {
-            ctx.strokeStyle = 'blue';
-            ctx.lineWidth = 3;
+            ctx.strokeStyle = '#66FCF1';
+            ctx.lineWidth = 4;
+            ctx.shadowBlur = 10;
+            ctx.shadowColor = '#66FCF1';
         } else if (visitedEdges.has(`${node1}-${node2}`) || visitedEdges.has(`${node2}-${node1}`)) {
-            ctx.strokeStyle = 'red';
+            ctx.strokeStyle = '#aa00ff';
             ctx.lineWidth = 2;
+            ctx.shadowBlur = 5;
+            ctx.shadowColor = '#aa00ff';
         } else {
-            ctx.strokeStyle = 'black';
-            ctx.lineWidth = 1;
+            ctx.strokeStyle = 'rgba(255, 255, 255, 0.1)';
+            ctx.lineWidth = 2;
+            ctx.shadowBlur = 0;
         }
 
         ctx.stroke();
-        ctx.lineWidth = 1;
+        ctx.shadowBlur = 0; // Reset shadow
 
         const midX = (pos1.x + pos2.x) / 2;
         const midY = (pos1.y + pos2.y) / 2;
-        ctx.fillStyle = 'black';
-        ctx.font = '14px Arial';
+        
+        // Background pill for edge weight
+        ctx.fillStyle = '#0b0c10';
+        ctx.beginPath();
+        ctx.roundRect(midX - 12, midY - 10, 24, 20, 5);
+        ctx.fill();
+
+        ctx.fillStyle = '#c5c6c7';
+        ctx.font = '12px Inter, sans-serif';
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
         ctx.fillText(weight.toString(), midX, midY);
     };
 
@@ -199,54 +229,231 @@ const DijkstraVisualization = () => {
     };
 
     return (
-        <>
-        <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-            <div>
-            <p style={{fontSize:'1.6rem',fontWeight:'bold'}}>Dijkstras Algorithm Visualization</p>
-            <section id="graph-container">
-                {/* <h2>Graph</h2> */}
-                <canvas ref={canvasRef} width="600" height="400" style={{ border: '1px solid black' }}></canvas>
-            </section>
+        <div className="dijkstra-wrapper">
+            <style>{`
+                .dijkstra-wrapper {
+                    padding: 40px 20px;
+                    min-height: 100vh;
+                    font-family: var(--font-body, 'Inter');
+                    color: var(--text-main, #FFFFFF);
+                }
 
-            <button id='visualizeDijkstraBtn'  style={{ backgroundColor: '#4CAF50',margin : '50px' }} onClick={visualizeAlgorithm} disabled={visualizeDisabled}>
-                Visualize Algorithm
-            </button>
+                .dijkstra-glass-card {
+                    background-color: rgba(255, 255, 255, 0.03);
+                    backdrop-filter: blur(12px);
+                    border: 1px solid rgba(255, 255, 255, 0.1);
+                    border-radius: 20px;
+                    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+                    padding: 40px;
+                    max-width: 1200px;
+                    margin: 0 auto;
+                }
 
-            {resetVisible && (
-                <button id="resetBtn" style={{ backgroundColor: 'grey', margin:'50px'}} onClick={reset}>
-                    Reset
-                </button>
-            )}  
+                .dijkstra-title {
+                    font-family: var(--font-heading, 'Outfit');
+                    font-size: 36px;
+                    font-weight: 800;
+                    margin-bottom: 30px;
+                    text-align: center;
+                    background: linear-gradient(135deg, #ffffff 0%, #66FCF1 100%);
+                    -webkit-background-clip: text;
+                    -webkit-text-fill-color: transparent;
+                }
+
+                .layout-grid {
+                    display: grid;
+                    grid-template-columns: 1fr 1fr;
+                    gap: 40px;
+                    align-items: start;
+                }
+
+                @media (max-width: 900px) {
+                    .layout-grid {
+                        grid-template-columns: 1fr;
+                    }
+                }
+
+                .canvas-container {
+                    background: rgba(0, 0, 0, 0.2);
+                    border-radius: 15px;
+                    padding: 20px;
+                    border: 1px solid rgba(255, 255, 255, 0.05);
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                }
+
+                .dijkstra-canvas {
+                    background: transparent;
+                    max-width: 100%;
+                    border-radius: 10px;
+                }
+
+                .controls-row {
+                    display: flex;
+                    gap: 15px;
+                    margin-top: 20px;
+                    justify-content: center;
+                }
+
+                .action-btn {
+                    padding: 12px 25px;
+                    font-size: 15px;
+                    font-family: var(--font-heading, 'Outfit');
+                    font-weight: 600;
+                    text-transform: uppercase;
+                    background: rgba(255, 255, 255, 0.05);
+                    color: white;
+                    border: 1px solid rgba(255, 255, 255, 0.1);
+                    border-radius: 50px;
+                    cursor: pointer;
+                    transition: all 0.3s ease;
+                }
+
+                .action-btn:disabled {
+                    opacity: 0.4;
+                    cursor: not-allowed;
+                }
+
+                .visualize-btn:not(:disabled):hover {
+                    background: linear-gradient(135deg, #45A29E, #66FCF1);
+                    box-shadow: 0 8px 20px rgba(102, 252, 241, 0.3);
+                    border-color: transparent;
+                    transform: translateY(-2px);
+                }
+
+                .reset-btn {
+                    background: rgba(255, 0, 0, 0.1);
+                    border-color: rgba(255, 0, 0, 0.2);
+                }
+
+                .reset-btn:hover {
+                    background: linear-gradient(135deg, #ff007f, #ff4e50);
+                    box-shadow: 0 8px 20px rgba(255, 0, 127, 0.3);
+                    border-color: transparent;
+                    transform: translateY(-2px);
+                }
+
+                .info-panel {
+                    background: rgba(0, 0, 0, 0.2);
+                    padding: 30px;
+                    border-radius: 15px;
+                    border: 1px solid rgba(255, 255, 255, 0.05);
+                }
+
+                .info-heading {
+                    color: var(--accent-cyan, #66FCF1);
+                    font-size: 1.2rem;
+                    font-weight: bold;
+                    margin-bottom: 10px;
+                    margin-top: 20px;
+                    font-family: var(--font-heading, 'Outfit');
+                }
+
+                .info-heading:first-child {
+                    margin-top: 0;
+                }
+
+                .info-text {
+                    color: var(--text-muted, #C5C6C7);
+                    line-height: 1.6;
+                    font-size: 0.95rem;
+                }
+
+                .stepwise-section {
+                    margin-top: 40px;
+                    padding-top: 40px;
+                    border-top: 1px solid rgba(255, 255, 255, 0.1);
+                }
+
+                .stepwise-header {
+                    font-size: 2rem;
+                    font-weight: bold;
+                    text-align: center;
+                    margin-bottom: 30px;
+                    color: var(--text-main, #FFFFFF);
+                    font-family: var(--font-heading, 'Outfit');
+                }
+
+                .instructions-panel {
+                    background: linear-gradient(135deg, rgba(102, 252, 241, 0.05), rgba(170, 0, 255, 0.05));
+                    padding: 20px;
+                    border-radius: 12px;
+                    border: 1px solid rgba(255, 255, 255, 0.05);
+                    margin-left: 20px;
+                }
+
+                .instructions-panel p {
+                    margin-bottom: 10px;
+                    color: var(--text-muted, #C5C6C7);
+                    display: flex;
+                    align-items: center;
+                }
+
+                .instructions-panel p::before {
+                    content: "•";
+                    color: var(--accent-cyan, #66FCF1);
+                    font-weight: bold;
+                    display: inline-block;
+                    width: 1em;
+                    margin-left: -1em;
+                }
+            `}</style>
+
+            <div className="dijkstra-glass-card">
+                <h2 className="dijkstra-title">Dijkstra's Algorithm Visualization</h2>
+                
+                <div className="layout-grid">
+                    <div className="canvas-container">
+                        <canvas ref={canvasRef} width="600" height="400" className="dijkstra-canvas"></canvas>
+                        <div className="controls-row">
+                            <button className="action-btn visualize-btn" onClick={visualizeAlgorithm} disabled={visualizeDisabled}>
+                                Visualize Algorithm
+                            </button>
+                            {resetVisible && (
+                                <button className="action-btn reset-btn" onClick={reset}>
+                                    Reset
+                                </button>
+                            )}
+                        </div>
+                    </div>
+
+                    <div className="info-panel">
+                        <div className="info-heading">Initialization:</div>
+                        <p className="info-text">Set the distance to the source node as 0. Set the distance to all other nodes as ∞ (infinity). Mark all nodes as unvisited.</p>
+                        
+                        <div className="info-heading">Select the Starting Node:</div>
+                        <p className="info-text">Choose the unvisited node with the smallest distance (initially the source node).</p>
+                        
+                        <div className="info-heading">Update Neighboring Nodes:</div>
+                        <p className="info-text">For the selected node, consider all of its unvisited neighboring nodes. For each neighbor, calculate the tentative distance: Tentative Distance = Distance to Current Node + Edge Weight to Neighbor. If the tentative distance is smaller than the currently known distance for that neighbor, update the distance for the neighbor. Mark Node as Visited.</p>
+                        
+                        <div className="info-heading">Repeat</div>
+                        <p className="info-text">Repeat until all nodes have been visited or the destination node has been reached.</p>
+                        
+                        <div className="info-heading">Termination:</div>
+                        <p className="info-text">When all nodes have been visited, or the shortest distance to the destination node is found, the algorithm terminates.</p>
+                    </div>
+                </div>
+
+                <div className="stepwise-section">
+                    <h2 className="stepwise-header">Stepwise Visualization</h2>
+                    <div style={{ display: 'flex', flexWrap: 'wrap' }}>
+                        <div style={{ flex: '1 1 500px' }}>
+                            <ContentSwitcher />
+                        </div>
+                        <div className="instructions-panel" style={{ flex: '1 1 300px' }}>
+                            <h2 style={{ fontSize: '1.2rem', fontWeight: 'bold', color: '#fff', marginBottom: '15px' }}>Legend & Instructions:</h2>
+                            <p><strong>A</strong> is Source Node</p>
+                            <p><strong>Z</strong> is Destination Node</p>
+                            <p>Click <strong>Next</strong> to go forward and <strong>Previous</strong> to go back</p>
+                            <p><span style={{color: '#aa00ff', fontWeight: 'bold'}}>Purple</span> nodes are Visited</p>
+                            <p><span style={{color: '#66FCF1', fontWeight: 'bold'}}>Cyan</span> nodes and edges indicate Shortest Path</p>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div style={{padding:'20px'}}>
-                <div style={{fontSize:'1.3rem', fontWeight:'bold'}}>Initialization:</div>
-                <p>Set the distance to the source node as 0. Set the distance to all other nodes as ∞ (infinity).Mark all nodes as unvisited.</p>
-                <div style={{fontSize:'1.3rem', fontWeight:'bold'}}>Select the Starting Node:</div>
-                <p>Choose the unvisited node with the smallest distance (initially the source node).</p>
-                <div style={{fontSize:'1.3rem', fontWeight:'bold'}}>Update Neighboring Nodes:</div>
-                <p>For the selected node, consider all of its unvisited neighboring nodes.For each neighbor, calculate the tentative distance from the source to that neighbor:Tentative Distance = Distance to Current Node + Edge Weight to NeighborIf the tentative distance is smaller than the currently known distance for that neighbor, update the distance for the neighbor.Mark Node as Visited</p>
-                <div style={{fontSize:'1.3rem', fontWeight:'bold'}}>Repeat</div>
-                <p>Repeat until all nodes have been visited or the destination node has been reached.</p>
-                <div style={{fontSize:'1.3rem', fontWeight:'bold'}}>Termination:</div>
-                <p>When all nodes have been visited, or the shortest distance to the destination node is found, the algorithm terminates.</p>
-                <div style={{fontSize:'1.3rem', fontWeight:'bold'}}>Below You can Visualize Stepwise....</div>
-            </div>   
         </div>
-              <h2 style={{ fontSize:'2rem',backgroundColor:'grey'}}>Stepwise Visualization</h2>
-           <div style={{display:'flex'}}>
-            <div>
-             <ContentSwitcher />
-             </div>
-             <div style={{padding:'30px'}}>
-                <h2 style={{fontSize:'1.2rem' ,fontWeight:'bold'}}>Instructions: </h2>
-                <p>A is Source Node</p>
-                <p>Z is Destination Node</p>
-                <p>Click Next for go Forward and Previous to go back</p>
-                <p>Orange Colored nodes are Visited</p>
-                <p>Green color Nodes and Edges indicates Shortest Path</p>
-             </div>
-            </div> 
-        </>
     );
 };
 

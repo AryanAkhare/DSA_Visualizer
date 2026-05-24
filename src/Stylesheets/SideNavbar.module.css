@@ -1,20 +1,22 @@
 /* Container to hold the sidebar and main content */
 .layout {
-    display: flex ;
-    min-height: 100vh; 
-    /* Full height layout */
-    background-color: whitesmoke;
-    color: black;
+    display: flex;
+    min-height: 100vh;
+    background-color: var(--bg-main, #0B0C10);
+    color: var(--text-main, #FFFFFF);
   }
   
   .nav {
-    width: 350px;
-    background-color: #2c3e50; /* Dark blue background */
-    display: flex;
+    height: calc(100vh - 80px);
+    width: 250px;
+    background-color: rgba(255, 255, 255, 0.03); /* Frosted Glass */
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-right: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 20px 0;
     position: sticky;
-    flex-direction: column;
-    padding-top: 20px;
-    box-shadow: 3px 0 10px rgba(0, 0, 0, 0.1);
+    top: 80px;
+    overflow-y: auto;
   }
   
   .ul {
@@ -24,36 +26,52 @@
   }
   
   .li {
-    margin:  0;
+    margin-bottom: 5px;
   }
   
   .a {
-    color: white;
+    display: flex;
+    align-items: center;
+    padding: 12px 24px;
+    color: var(--text-muted, #C5C6C7);
     text-decoration: none;
-    font-size: 18px;
-    font-family: 'Arial', sans-serif;
-    padding: 15px 20px;
-    display: block;
-    transition: background-color 0.3s ease;
+    font-family: var(--font-body, 'Inter');
+    font-weight: 500;
+    font-size: 16px;
+    transition: all 0.3s ease;
+    border-left: 3px solid transparent;
   }
   
   .a:hover {
-    background-color: #34495e; /* Slightly lighter blue on hover */
-    border-left: 4px solid #e74c3c; /* Red highlight on hover */
+    color: var(--text-main, #FFFFFF);
+    background-color: rgba(255, 255, 255, 0.08);
+    border-left-color: var(--accent-purple, #aa00ff);
+    padding-left: 28px;
   }
   
   .a:active {
-    background-color: #1abc9c; /* Different background on active */
+    background-color: rgba(255, 255, 255, 0.12);
   }
   
   /* Main content styles */
   .main-content {
     flex-grow: 1;
     padding: 20px;
-    background-color: #ffffff; /* White background for main content */
+    background-color: transparent;
     box-sizing: border-box;
   }
   
-  
-  
-  
+  /* Custom scrollbar for SideNav */
+  .nav::-webkit-scrollbar {
+    width: 6px;
+  }
+  .nav::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  .nav::-webkit-scrollbar-thumb {
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+  }
+  .nav::-webkit-scrollbar-thumb:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+  }

@@ -38,7 +38,7 @@ const AimStack = () => {
         fontWeight: 700,
         lineHeight: '1.6',            
         marginBottom: '8px',          
-        color: '#333',                
+        color: 'var(--text-main, #FFFFFF)',                
         listStyleType: 'disc',        
                   
     };

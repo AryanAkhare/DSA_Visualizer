@@ -1,104 +1,133 @@
-.testContainer {
-    width: 80%;
+.container {
     max-width: 800px;
-    margin: 0 auto;
-    padding: 20px;
-    border: 1px solid #ddd;
-    border-radius: 10px;
-    background-color: #f9f9f9;
-    font-family: Arial, sans-serif; /* Standard font for uniformity */
+    margin: 40px auto;
+    padding: 30px;
+    background-color: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    font-family: var(--font-body, 'Inter');
+    color: var(--text-main, #FFFFFF);
 }
 
-.heading {
+.title {
     text-align: center;
-    color: #333; /* Darker shade for better contrast */
-    font-size: 28px; /* Slightly reduced size */
-    margin: 20px 0; /* Uniform margin */
+    color: var(--text-main, #FFFFFF);
+    margin-bottom: 30px;
+    font-family: var(--font-heading, 'Outfit');
+    font-size: 32px;
+    background: linear-gradient(135deg, #ffffff 0%, #66FCF1 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
 
 .questionContainer {
-    margin-bottom: 20px;
-    padding: 10px; /* Added padding for better spacing */
-    border: 1px solid #e0e0e0; /* Subtle border for question separation */
-    border-radius: 8px; /* Rounded corners */
-    background-color: #fff; /* White background for questions */
+    margin-bottom: 30px;
+    padding: 20px;
+    background-color: rgba(255, 255, 255, 0.05);
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
 }
 
-ul {
+.question {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 15px;
+    color: var(--text-main, #FFFFFF);
+}
+
+.optionsList {
     list-style-type: none;
-    padding-left: 0;
+    padding: 0;
 }
 
-label {
-    font-size: 16px; /* Uniform font size */
+.option {
+    margin: 10px 0;
+    padding: 12px 15px;
+    background-color: rgba(255, 255, 255, 0.03);
+    border-radius: 8px;
     cursor: pointer;
-    font-weight: 400;
-    margin:0.5em;
-    display: block; /* Full width for easy clicking */
-    padding: 8px; /* Added padding for touch targets */
-    border-radius: 5px; /* Rounded corners */
-    transition: background-color 0.2s ease; /* Smooth transition */
+    transition: all 0.3s ease;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: var(--text-muted, #C5C6C7);
 }
 
-label:hover {
-    background-color: #f0f0f0; /* Light hover effect */
+.option:hover {
+    background-color: rgba(255, 255, 255, 0.08);
+    border-color: rgba(102, 252, 241, 0.3);
+    color: var(--text-main, #FFFFFF);
 }
 
 .correct {
-    color: white; /* White text for better contrast */
-    font-weight: bold;
-    max-width: fit-content;
-    background-color: #4caf50; /* Green background */
-    padding: 8px 12px; /* Padding for better spacing */
-    border-radius: 8px; /* Rounded corners */
-    margin-top: 5px; /* Space above the message */
-    transition: background-color 0.3s ease; /* Smooth transition */
+    background-color: rgba(76, 175, 80, 0.2);
+    border-color: #4caf50;
+    color: #4caf50;
 }
 
-.wrong {
-    color: white; /* White text for better contrast */
-    font-weight: bold;
-    max-width: fit-content;
-    background-color: #f44336; /* Red background */
-    padding: 8px 12px; /* Padding for better spacing */
-    border-radius: 8px; /* Rounded corners */
-    margin-top: 5px; /* Space above the message */
-    transition: background-color 0.3s ease; /* Smooth transition */
+.incorrect {
+    background-color: rgba(244, 67, 54, 0.2);
+    border-color: #f44336;
+    color: #f44336;
 }
 
-.submitButton {
-    
-          font-size: 16px;
-          background-color: #111827;
-          color: white;
-          border: none;
-          border-radius: 8px;
-          cursor: pointer;
-          transition: background-color 0.3s, transform 0.2s, box-shadow 0.2s;
-          align-items: center;
-          justify-content: center;
-}
-
-.submitButton:hover {
-    background-color: #45a049;
-}
-
-.finalScore {
-    text-align: center;
-    padding: 12px;
-    font-size: 24px; /* Slightly reduced size for uniformity */
-    font-weight: bold;
-    background-color: #2196f3;
-    color: white;
-    border-radius: 10px;
-    margin-top: 20px;
+.submitBtn {
+    display: block;
+    width: 100%;
+    padding: 15px;
     font-size: 16px;
-          
-          color: white;
-          border: none;
-          border-radius: 8px;
-          cursor: pointer;
-          transition: background-color 0.3s, transform 0.2s, box-shadow 0.2s;
-          align-items: center;
-          justify-content: center;
+    font-family: var(--font-heading, 'Outfit');
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    background: linear-gradient(135deg, var(--accent-teal, #45A29E), var(--accent-cyan, #66FCF1));
+    color: white;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(102, 252, 241, 0.2);
+    margin-top: 20px;
+}
+
+.submitBtn:hover {
+    background: linear-gradient(135deg, var(--accent-purple, #aa00ff), #3c00ff);
+    box-shadow: 0 8px 20px rgba(170, 0, 255, 0.4);
+    transform: translateY(-2px);
+}
+
+.scoreContainer {
+    text-align: center;
+    margin-top: 30px;
+    padding: 30px;
+    background-color: rgba(255, 255, 255, 0.05);
+    border-radius: 16px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.score {
+    font-size: 28px;
+    font-weight: bold;
+    color: var(--accent-cyan, #66FCF1);
+    margin-bottom: 20px;
+    font-family: var(--font-heading, 'Outfit');
+}
+
+.restartBtn {
+    padding: 12px 30px;
+    font-size: 16px;
+    font-weight: 600;
+    font-family: var(--font-heading, 'Outfit');
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.restartBtn:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: translateY(-2px);
 }

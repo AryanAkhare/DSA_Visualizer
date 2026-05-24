@@ -88,12 +88,12 @@ const HashTable = ({ size }) => {
           align-items: center;
           justify-content: center;
           height: 100vh;
-          background-color: white;
+          background-color: transparent;
           border-radius: 16px;
         }
 
         .hash-box {
-          background-color: #f0f2f5;
+          background-color: rgba(255,255,255,0.05);
           border-radius: 12px;
           padding: 30px;
           box-shadow: 0 8px 20px rgba(0, 0, 0, 0.18);
@@ -116,8 +116,8 @@ const HashTable = ({ size }) => {
         .hash-operations input {
           padding: 12px;
           font-size: 16px;
-          background-color: #fff;
-          color: #111827;
+          background-color: transparent;
+          color: var(--text-main, #FFFFFF);
           border: 1px solid #ddd;
           border-radius: 8px;
           transition: border-color 0.3s;
@@ -141,7 +141,7 @@ const HashTable = ({ size }) => {
         button {
           padding: 12px 20px;
           font-size: 16px;
-          background-color: #111827;
+          background-color: var(--text-main, #FFFFFF);
           color: white;
           border: none;
           border-radius: 8px;
@@ -176,7 +176,7 @@ const HashTable = ({ size }) => {
           padding: 20px;
           border: 2px solid #4caf50;
           border-radius: 15px;
-          background-color: #111827;
+          background-color: var(--text-main, #FFFFFF);
           box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
           width: 100%;
           max-width: 550px;
@@ -189,7 +189,7 @@ const HashTable = ({ size }) => {
           display: flex;
           align-items: center;
           justify-content: center;
-          background-color: #f1f1f1;
+          background-color: rgba(255,255,255,0.05);
           transition: background-color 0.5s, transform 0.5s;
         }
 
@@ -214,13 +214,13 @@ const HashTable = ({ size }) => {
         .hash-calculation {
           margin-top: 20px;
           font-weight: bold;
-          color: #333;
+          color: var(--text-main, #FFFFFF);
         }
 
         .hash-function-details {
           margin-top: 30px;
           font-size: 14px;
-          color: #333;
+          color: var(--text-main, #FFFFFF);
           text-align: left;
         }
 
@@ -230,7 +230,7 @@ const HashTable = ({ size }) => {
           h2 {
         font-size: 36px; 
         font-weight: 600; 
-        color: #1f2937; 
+        color: var(--text-main, #FFFFFF); 
         margin-bottom: 25px; 
         text-align: center; 
         letter-spacing: 1px; 

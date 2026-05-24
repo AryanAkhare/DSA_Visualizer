@@ -1,97 +1,146 @@
 .container {
-
     display: flex;
-    /* justify-content: center; */
-    /* align-items: center; */
-    background-color: rgba(0, 12, 30, 0.5);
-    height: 90vh;
-    padding: 0;
-    margin: 0;
-    box-sizing: border-box;
-
-    background: #000000;
-    --gap: 5em;
-    --line: 1px;
-    --color: rgba(255, 255, 255, 0.2);
-  
-    background-image: linear-gradient(
-        -90deg,
-        transparent calc(var(--gap) - var(--line)),
-        var(--color) calc(var(--gap) - var(--line) + 1px),
-        var(--color) var(--gap)
-      ),
-      linear-gradient(
-        0deg,
-        transparent calc(var(--gap) - var(--line)),
-        var(--color) calc(var(--gap) - var(--line) + 1px),
-        var(--color) var(--gap)
-      );
-    background-size: var(--gap) var(--gap);
-
-}
-.tagLine {
-    color:white;
-    width: 60vw;
-    margin:2rem 2rem 1rem 2rem;
-    height: 40vh;
-    padding: 2rem 2rem 1rem 2rem;
-    font-size: 50px;
-    display: flex;
-    font-weight: 600;
-    justify-content: center;
-    flex-direction: column;
+    justify-content: space-between;
     align-items: center;
+    min-height: 100vh;
+    padding: 0 8vw;
+    box-sizing: border-box;
+    background-color: var(--bg-main);
+    
+    /* Modern Animated Mesh/Grid Background */
+    background-image: 
+      radial-gradient(circle at 15% 50%, rgba(102, 252, 241, 0.08), transparent 25%),
+      radial-gradient(circle at 85% 30%, rgba(170, 0, 255, 0.08), transparent 25%);
+    position: relative;
+    overflow: hidden;
 }
+
+/* Subtle background grid */
+.container::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: 
+        linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+    background-size: 50px 50px;
+    z-index: 0;
+    pointer-events: none;
+}
+
 .content {
-    height: 82vh;
+    flex: 1;
+    z-index: 1;
+    padding-top: 5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.tagLine {
+    font-family: var(--font-heading);
+    font-size: 4rem;
+    font-weight: 800;
+    line-height: 1.1;
+    margin-bottom: 1.5rem;
+    
+    /* Vibrant Gradient Text */
+    background: linear-gradient(135deg, #ffffff 0%, var(--accent-cyan) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    
+    text-shadow: 0px 4px 20px rgba(102, 252, 241, 0.2);
+}
+
+.para {
+    font-family: var(--font-body);
+    color: var(--text-muted);
+    font-size: 1.25rem;
+    line-height: 1.6;
+    max-width: 600px;
+    margin-bottom: 2.5rem;
+    font-weight: 400;
+}
+
+.LearnBtn {
+    display: inline-block;
+    padding: 1rem 2.5rem;
+    font-size: 1.1rem;
+    font-weight: 600;
+    font-family: var(--font-heading);
+    color: #ffffff;
+    background: linear-gradient(135deg, var(--accent-teal), var(--accent-cyan));
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    box-shadow: 0 8px 20px rgba(102, 252, 241, 0.3);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.LearnBtn:hover {
+    transform: translateY(-5px) scale(1.05);
+    box-shadow: 0 15px 25px rgba(102, 252, 241, 0.5);
+}
+
+.LearnBtn:active {
+    transform: translateY(2px) scale(0.98);
 }
 
 .animation {
-    color:white;
-    width: 30vw;
-    margin: 2rem;
-    height: 84vh;
-    padding: 2rem;
+    flex: 1;
+    z-index: 1;
     display: flex;
     justify-content: center;
-    align-items: start;
+    align-items: center;
+    padding-top: 5rem;
 }
-.para {
 
-    color:white;
-    width: 50vw;
-    font-weight: 600;
-    margin: 0.5rem 1rem 1rem 1rem;
-    padding: 0.5rem 1rem 1rem 1rem;
-    font-size: 20px;
-    margin-left: 3rem;
+.heroImage {
+    width: 100%;
+    max-width: 550px;
+    border-radius: 20px;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255, 255, 255, 0.1);
+    transform: perspective(1000px) rotateY(-5deg) rotateX(5deg);
+    transition: transform 0.5s ease, box-shadow 0.5s ease;
 }
-.LearnBtn {
-    
-    margin-left: 3.5rem;
-    width: 25vh;
-    height: 7vh;
-    background-color:rgb(7, 54, 129) ;
-    margin-top: 0px;
-    padding-top: 0px;
-    
-    display: inline-block;
-    background-color: #0ea5e9;
-    padding: 0.75rem 1.25rem;
-    border-radius: 0.5rem;
-    color: #f8fafc;
-    text-align: center;
-    font-weight: 600;
-    text-decoration: none;
-    transition: background-color 0.3s ease-in-out;
-    
-    &:hover {
-      background-color: #aa00ff;
-      color:white;
+
+.heroImage:hover {
+    transform: perspective(1000px) rotateY(0deg) rotateX(0deg) scale(1.02);
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.6), 0 0 20px rgba(102, 252, 241, 0.2);
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+    .container {
+        flex-direction: column;
+        padding: 6rem 5vw 4rem 5vw;
+        text-align: center;
+    }
+    .content {
+        align-items: center;
+        padding-top: 2rem;
+    }
+    .tagLine {
+        font-size: 3rem;
+    }
+    .heroImage {
+        transform: none;
+        margin-top: 3rem;
+    }
+    .heroImage:hover {
+        transform: scale(1.02);
     }
 }
-.LearnBtn:hover {
-    box-shadow: 2px 2px 10px rgb(109, 159, 240);
-    border: none;
-}
 
+@media (max-width: 600px) {
+    .tagLine {
+        font-size: 2.5rem;
+    }
+    .para {
+        font-size: 1rem;
+    }
+}

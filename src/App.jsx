@@ -69,6 +69,11 @@ import QueuesVisualization from './Algorithms/Queue/QueueVisualization';
 import QueueImplementation from './Algorithms/Queue/QueueImplement.jsx'
 import QueueTutorial from './Algorithms/Queue/QueueTutorial.jsx'
 
+// New placeholder pages
+import TreesPage from './Algorithms/Trees/TreesPage.jsx';
+import DPPage from './Algorithms/DP/DPPage.jsx';
+import GreedyPage from './Algorithms/Greedy/GreedyPage.jsx';
+
 function App() {
   return (
       <BrowserRouter>
@@ -150,6 +155,11 @@ function App() {
             <Route path="tutorial" element={<QueueTutorial />} />
             <Route path="*" element={<Navigate to={'.'} />} />
           </Route>
+
+          {/* New Algorithm Routes */}
+          <Route path="/courses/:courseId/Trees" element={<TreesPage />} />
+          <Route path="/courses/:courseId/Dynamic Programming" element={<DPPage />} />
+          <Route path="/courses/:courseId/Greedy Algorithms" element={<GreedyPage />} />
 
         </Routes>
                 

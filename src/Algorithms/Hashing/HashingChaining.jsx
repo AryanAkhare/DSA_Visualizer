@@ -64,7 +64,7 @@ const HashingChaining = () => {
           align-items: center;
           justify-content: center;
           height: 100%;
-          background-color: white;
+          background-color: transparent;
           border-radius: 16px;
           position: relative;
           padding: 20px;
@@ -73,7 +73,7 @@ const HashingChaining = () => {
         h2 {
           font-size: 36px;
           font-weight: 600;
-          color: #1f2937;
+          color: var(--text-main, #FFFFFF);
           margin-bottom: 25px;
           text-align: center;
           letter-spacing: 1px;
@@ -81,7 +81,7 @@ const HashingChaining = () => {
         }
 
         .hash-box {
-          background-color: #f0f2f5;
+          background-color: rgba(255,255,255,0.05);
           border-radius: 12px;
           padding: 30px;
           box-shadow: 0 8px 20px rgba(0, 0, 0, 0.18);
@@ -104,8 +104,8 @@ const HashingChaining = () => {
         .hash-operations input {
           padding: 12px;
           font-size: 16px;
-          background-color: #fff;
-          color: #111827;
+          background-color: transparent;
+          color: var(--text-main, #FFFFFF);
           border: 1px solid #ddd;
           border-radius: 8px;
           transition: border-color 0.3s;
@@ -129,7 +129,7 @@ const HashingChaining = () => {
         button {
           padding: 12px 20px;
           font-size: 16px;
-          background-color: #111827;
+          background-color: var(--text-main, #FFFFFF);
           color: white;
           border: none;
           border-radius: 8px;
@@ -168,7 +168,7 @@ const HashingChaining = () => {
           border-radius: 8px;
           padding: 10px;
           margin-bottom: 10px;
-          background-color: #111827;
+          background-color: var(--text-main, #FFFFFF);
           color: white;
           flex-wrap: nowrap; /* Prevent wrapping */
           white-space: nowrap; /* No line breaks */

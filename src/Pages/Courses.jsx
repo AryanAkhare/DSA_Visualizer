@@ -8,23 +8,23 @@ const courseData = [
     price: "Fundamentals",
     description: "Understand stacks, queues and linked lists for effective data handling.",
     link: "/course/beginner",
-    items: ["Stacks", "Queues", "Linked Lists"], // List for Fundamentals course
+    items: ["Stacks", "Queues", "Linked Lists"],
   },
   {
     id: 2,
-    title: "Data Structures",
+    title: "Algorithms",
     price: "Search & Sort",
     description: "Learn key algorithms for efficient data searching and sorting.",
     link: "/course/intermediate",
-    items: ["Binary Search", "Quick Sort", "Merge Sort"], // List for Search & Sort course
+    items: ["Binary Search", "Quick Sort", "Merge Sort"],
   },
   {
     id: 3,
-    title: "Data Structures",
-    price: "Advanced",
-    description: "Dive into trees, graphs, and hashing for complex problem-solving.",
+    title: "Advanced",
+    price: "DSA",
+    description: "Master trees, dynamic programming, and greedy algorithms for complex problem-solving.",
     link: "/course/advanced",
-    items: ["Binary Trees", "Graphs", "Hash Tables"], // List for Advanced course
+    items: ["Trees & Graphs", "Dynamic Programming", "Greedy Algorithms"],
   },
 ];
 
@@ -44,7 +44,6 @@ const Courses = () => {
           <ul className="eduzone-course-lists">
             {course.items.map((item, index) => (
               <li className="eduzone-course-list" key={index}>
-
                 <svg fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                   <path
                     clipRule="evenodd"
@@ -52,7 +51,6 @@ const Courses = () => {
                     fillRule="evenodd"
                   />
                 </svg>
-
                 <p>{item}</p>
               </li>
             ))}
@@ -71,123 +69,146 @@ const Courses = () => {
 const StyledWrapper = styled.div`
   display: flex;
   flex-wrap: wrap;
-  gap: 2rem;
-  padding: 2rem; 
-  height: 100vh; /* Add padding around the wrapper */
-  background: #121212; /* Fallback for browsers that don't support gradients */
-  background: linear-gradient(
-    135deg,
-    #121212 25%,
-    #1a1a1a 25%,
-    #1a1a1a 50%,
-    #121212 50%,
-    #121212 75%,
-    #1a1a1a 75%,
-    #1a1a1a
-  );
-  background-size: 40px 40px;
+  gap: 3rem;
+  padding: 6rem 2rem 4rem 2rem; 
+  min-height: 100vh;
+  justify-content: center;
+  align-items: center;
+  
+  /* Modern Mesh Gradient Background */
+  background-color: var(--bg-main, #0B0C10);
+  background-image: 
+      radial-gradient(circle at 85% 50%, rgba(102, 252, 241, 0.05), transparent 30%),
+      radial-gradient(circle at 15% 30%, rgba(170, 0, 255, 0.05), transparent 30%);
+  position: relative;
+  overflow: hidden;
 
-  /* Animation */
-  animation: move 4s linear infinite;
-}
-
-@keyframes move {
-  0% {
-    background-position: 0 0;
+  &::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: 
+          linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+      background-size: 50px 50px;
+      z-index: 0;
+      pointer-events: none;
   }
-  100% {
-    background-position: 40px 40px;
-  }
-}
 
   .eduzone-course-card {
-    flex: 1 1 300px; /* Flex-grow, flex-shrink, flex-basis */
-    max-width: 320px; /* Maximum width for cards */
-    border-radius: 1rem;
-    background-color: #020617;
-    padding: 1.5rem;
+    flex: 1 1 300px;
+    max-width: 350px;
+    border-radius: 20px;
+    
+    /* Glassmorphism Styling */
+    background-color: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    
+    padding: 2rem;
     display: flex;
-    flex-direction: column; /* Ensure vertical stacking */
-    justify-content: space-between; /* Space out elements evenly */
-    height: 50%; 
-    box-shadow: 10px 25px 30px 10px rgba(41, 40, 40, 0.3);
-    transition: all 0.5s cubic-bezier(0.3, 1, 0.32, 1);
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 450px; 
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    z-index: 1;
+
     &:hover {
-      
-      transform: translate(2px)  scale(1.02);
-      background-color :black;
-  ;
+      transform: translateY(-10px) scale(1.02);
+      border-color: rgba(102, 252, 241, 0.4);
+      box-shadow: 0 20px 40px rgba(102, 252, 241, 0.15), 0 0 0 1px rgba(170, 0, 255, 0.2);
     }
   }
 
   header {
     display: flex;
     flex-direction: column;
-    align-items: flex-start; /* Align header items to the left */
+    align-items: flex-start;
   }
 
   .eduzone-course-title {
-    font-size: 1.5rem; /* Increase font size for better readability */
-    line-height: 2rem;
-    font-weight: 700;
-    color: #f8fafc90;
+    font-family: var(--font-heading, 'Outfit');
+    font-size: 1.4rem;
+    line-height: 1.2;
+    font-weight: 600;
+    color: var(--text-muted, #C5C6C7);
+    margin-bottom: 0.5rem;
   }
 
   .eduzone-course-price {
-    font-size: 2.5rem; /* Adjusted font size for price */
-    line-height: 1;
-    font-weight: 700;
-    color: #f8fafc;
+    font-family: var(--font-heading, 'Outfit');
+    font-size: 2.2rem;
+    line-height: 1.1;
+    font-weight: 800;
+    color: var(--text-main, #FFFFFF);
+    margin: 0;
+    
+    background: linear-gradient(135deg, #ffffff 0%, #66FCF1 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
   }
 
   .eduzone-course-desc {
-    margin: 0.75rem 0;
-    color: #f8fafc90;
-    flex-grow: 1; /* Allow description to grow */
+    margin: 1.5rem 0;
+    color: var(--text-muted, #C5C6C7);
+    font-family: var(--font-body, 'Inter');
+    font-size: 1rem;
+    line-height: 1.6;
+    flex-grow: 1;
   }
 
   .eduzone-course-lists {
-    margin-bottom: 1rem;
-    color: #f8fafc90;
-    transition: transform 0.3s ease;
-    &:hover {
-    transform: scale(1.002);
-    }
+    margin-bottom: 2rem;
+    color: var(--text-main, #FFFFFF);
+    list-style: none;
+    padding: 0;
   }
 
   .eduzone-course-list {
     display: flex;
-    align-items: center; /* Center the icon and text */
-    margin-bottom: 0.5rem;
-    
-   
+    align-items: center;
+    margin-bottom: 0.8rem;
+    font-family: var(--font-body, 'Inter');
+    font-size: 0.95rem;
+    font-weight: 500;
   }
 
   .eduzone-course-list svg {
-    height: 1.5rem;
-    width: 1.5rem;
-    margin-right: 0.5rem;
-    color:  #0ea5e9;
-    &:hover {
-      color: #aa00ee;
-    }
-    
+    height: 1.2rem;
+    width: 1.2rem;
+    margin-right: 0.8rem;
+    color: var(--accent-cyan, #66FCF1);
+    transition: color 0.3s ease;
+  }
+  
+  .eduzone-course-list:hover svg {
+    color: var(--accent-purple, #aa00ff);
   }
 
   .eduzone-course-action {
-    display: inline-block;
-    background-color: #0ea5e9;
-    padding: 0.75rem 1.25rem;
-    border-radius: 0.5rem;
-    color: #f8fafc;
+    display: block;
+    width: 100%;
+    background: linear-gradient(135deg, var(--accent-teal, #45A29E), var(--accent-cyan, #66FCF1));
+    padding: 0.8rem 1.5rem;
+    border-radius: 50px;
+    color: #ffffff;
     text-align: center;
     font-weight: 600;
+    font-family: var(--font-heading, 'Outfit');
+    text-transform: uppercase;
+    letter-spacing: 1px;
     text-decoration: none;
-    transition: background-color 0.3s ease-in-out;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(102, 252, 241, 0.2);
+    box-sizing: border-box;
     
     &:hover {
-      background-color: #aa00ff;
-      color:white;
+      background: linear-gradient(135deg, var(--accent-purple, #aa00ff), #3c00ff);
+      box-shadow: 0 8px 20px rgba(170, 0, 255, 0.4);
+      transform: translateY(-2px);
     }
   }
 `;

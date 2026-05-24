@@ -17,7 +17,7 @@ const listStyle = {
         fontWeight: 400,
         lineHeight: '1.6',            
         marginBottom: '8px',          
-        color: '#333',                        
+        color: 'var(--text-main, #FFFFFF)',                        
         paddingLeft: '20px',          
     };
 const content={

@@ -21,7 +21,7 @@ export default function Home({ onLearnMoreClick }) {
             </section>
 
             <section className={style.animation}>
-                <img src={dsaimg} alt="A representation of data structures and algorithms" />
+                <img src={dsaimg} alt="A representation of data structures and algorithms" className={style.heroImage} />
             </section>
         </div>
     );

@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 const Visualization_Sort = () => {
   const [array, setArray] = useState([]);
   const [isSorting, setIsSorting] = useState(false);
-  const [delay, setDelay] = useState(1000);
+  const [delay, setDelay] = useState(100);
   const [hasPressedStop, setHasPressedStop] = useState(false);
   const [sortedIndexes, setSortedIndexes] = useState(new Set());
   const [comparedIndexes, setComparedIndexes] = useState([]);
@@ -14,7 +14,7 @@ const Visualization_Sort = () => {
 
   const createNewArray = (noOfBars = 20) => {
     const newArray = Array.from({ length: noOfBars }, () =>
-      Math.floor(Math.random() * 251)
+      Math.floor(Math.random() * 251) + 20
     );
     setArray(newArray);
     setSortedIndexes(new Set());
@@ -95,123 +95,206 @@ const Visualization_Sort = () => {
   };
 
   return (
-    <div
-      className="app"
-      style={{
-        backgroundColor: "#c3f3f3",
-        borderRadius: "20px",
-        height: "100vh",
-        color: "#00695c",
-      }}
-    >
-      <div className="controls">
-        <button onClick={handleSort} disabled={isSorting}>
-          Merge Sort
-        </button>
-        <button onClick={() => createNewArray(20)} disabled={isSorting}>
-          Reset Bars
-        </button>
-        <input
-          type="range"
-          min="100"
-          max="5000"
-          value={delay}
-          onChange={(e) => setDelay(e.target.value)}
-          disabled={isSorting}
-        />
-        <span>Speed: {delay} ms</span>
-      </div>
-      <div className="flex-container">
-        {array.map((value, index) => (
-          <div
-            key={index}
-            className="bar"
-            style={{
-              background: comparedIndexes.includes(index)
-                ? "#ff7043" // Coral color for bars being compared
-                : sortedIndexes.has(index)
-                ? "#4caf50" // Calming sea green for sorted bars
-                : "#279EFF", // Light teal for unsorted bars
-              height: `${value * 2}px`,
-            }}
-          >
-            <span className="bar-value">{value}</span>
+    <div className="sort-wrapper">
+      <div className="sort-glass-card">
+        <h2 className="sort-title">Merge Sort Visualizer</h2>
+        
+        <div className="sort-controls">
+          <button className="action-btn" onClick={handleSort} disabled={isSorting}>
+            Merge Sort
+          </button>
+          <button className="action-btn" onClick={() => createNewArray(20)} disabled={isSorting}>
+            Reset Bars
+          </button>
+          
+          <div className="slider-container">
+            <span className="slider-label">Delay:</span>
+            <input
+              className="slider"
+              type="range"
+              min="10"
+              max="1000"
+              value={delay}
+              onChange={(e) => setDelay(e.target.value)}
+              disabled={isSorting}
+            />
+            <span className="slider-value">{delay} ms</span>
           </div>
-        ))}
+        </div>
+        
+        <div className="flex-container">
+          {array.map((value, index) => {
+            let barColor = "var(--bar-unsorted)";
+            if (comparedIndexes.includes(index)) {
+              barColor = "var(--bar-comparing)";
+            } else if (sortedIndexes.has(index)) {
+              barColor = "var(--bar-sorted)";
+            }
+            
+            return (
+              <div
+                key={index}
+                className="bar"
+                style={{
+                  background: barColor,
+                  height: `${value * 1.5}px`,
+                  boxShadow: comparedIndexes.includes(index) ? '0 0 15px rgba(255, 0, 127, 0.6)' : 'none'
+                }}
+              >
+                <span className="bar-value">{value}</span>
+              </div>
+            );
+          })}
+        </div>
       </div>
+
       <style>
         {`
-        /* General App Styles */
-        body {
-          margin: 0;
-          padding: 0;
-          font-family: 'Roboto', sans-serif;
-          background-color: #e0f2f1;
-          color: #00695c;
+        :root {
+          --bar-unsorted: linear-gradient(to top, #2575fc, #6a11cb);
+          --bar-comparing: linear-gradient(to top, #ff007f, #aa00ff);
+          --bar-sorted: linear-gradient(to top, #45A29E, #66FCF1);
         }
-        .app {
+
+        .sort-wrapper {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          padding: 40px 20px;
+          min-height: 100vh;
+          font-family: var(--font-body, 'Inter');
+        }
+
+        .sort-glass-card {
+          background-color: rgba(255, 255, 255, 0.03);
+          backdrop-filter: blur(12px);
+          border: 1px solid rgba(255, 255, 255, 0.1);
+          border-radius: 20px;
+          box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+          padding: 40px;
+          width: 100%;
+          max-width: 900px;
+          display: flex;
+          flex-direction: column;
+        }
+
+        .sort-title {
+          font-family: var(--font-heading, 'Outfit');
+          font-size: 36px;
+          font-weight: 800;
+          margin-bottom: 30px;
           text-align: center;
+          background: linear-gradient(135deg, #ffffff 0%, #66FCF1 100%);
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+        }
+
+        .sort-controls {
+          display: flex;
+          flex-wrap: wrap;
+          justify-content: center;
+          align-items: center;
+          gap: 20px;
+          margin-bottom: 40px;
+          background: rgba(0, 0, 0, 0.2);
           padding: 20px;
+          border-radius: 15px;
+          border: 1px solid rgba(255, 255, 255, 0.05);
         }
-        /* Controls Styling */
-        .controls {
-          margin-bottom: 20px;
-        }
-        button {
-          background-color: #00897b;
+
+        .action-btn {
+          padding: 12px 25px;
+          font-size: 15px;
+          font-family: var(--font-heading, 'Outfit');
+          font-weight: 600;
+          text-transform: uppercase;
+          background: rgba(255, 255, 255, 0.05);
           color: white;
-          border: none;
-          padding: 10px 20px;
-          margin-right: 10px;
-          border-radius: 5px;
+          border: 1px solid rgba(255, 255, 255, 0.1);
+          border-radius: 50px;
           cursor: pointer;
-          transition: background-color 0.3s ease;
+          transition: all 0.3s ease;
         }
-        button:disabled {
-          background-color: #80cbc4;
+
+        .action-btn:disabled {
+          opacity: 0.4;
           cursor: not-allowed;
         }
-        button:hover:not(:disabled) {
-          background-color: #00796b;
+
+        .action-btn:not(:disabled):hover {
+          background: linear-gradient(135deg, #45A29E, #66FCF1);
+          box-shadow: 0 8px 20px rgba(102, 252, 241, 0.3);
+          border-color: transparent;
+          transform: translateY(-2px);
         }
-        input[type="range"] {
-          width: 200px;
-          margin-left: 10px;
+
+        .slider-container {
+          display: flex;
+          align-items: center;
+          gap: 15px;
         }
-        span {
-          margin-left: 10px;
-          color: #00796b;
-          font-size: 20px;
-          font-weight: 700;
+
+        .slider-label {
+          color: var(--text-muted, #C5C6C7);
+          font-weight: bold;
         }
-        /* Flex Container and Bar Styling */
+
+        .slider-value {
+          color: var(--accent-cyan, #66FCF1);
+          font-weight: bold;
+          min-width: 60px;
+        }
+
+        .slider {
+          -webkit-appearance: none;
+          width: 150px;
+          height: 6px;
+          background: rgba(255, 255, 255, 0.1);
+          border-radius: 5px;
+          outline: none;
+        }
+
+        .slider::-webkit-slider-thumb {
+          -webkit-appearance: none;
+          appearance: none;
+          width: 16px;
+          height: 16px;
+          border-radius: 50%;
+          background: #66FCF1;
+          cursor: pointer;
+          box-shadow: 0 0 10px rgba(102, 252, 241, 0.5);
+        }
+
         .flex-container {
           display: flex;
           justify-content: center;
           align-items: flex-end;
-          height: 600px;
-          padding: 10px;
+          height: 450px;
+          padding: 20px;
+          background: rgba(0, 0, 0, 0.3);
+          border-radius: 15px;
+          border: 1px solid rgba(255, 255, 255, 0.05);
+          box-shadow: inset 0 0 30px rgba(0, 0, 0, 0.5);
+          gap: 4px;
         }
+
         .bar {
           position: relative;
-          width: 2em;
-          margin: 0 2px;
+          width: 30px;
           min-height: 20px;
-          transition: height 0.5s ease, background 0.5s ease;
-          background-color: #145a32;
-          border-radius: 3px 3px 0 0;
+          border-radius: 6px 6px 0 0;
+          transition: height 0.3s ease, background 0.3s ease, box-shadow 0.3s ease;
         }
-        .bar:hover {
-          opacity: 0.8;
-        }
+
         .bar-value {
           position: absolute;
-          top: 50%;
-          left: 20%;
-          transform: translate(-50%, -50%);
-          color: #004d40;
+          top: -25px;
+          left: 50%;
+          transform: translateX(-50%);
+          color: rgba(255, 255, 255, 0.8);
           font-weight: bold;
-          font-size: 18px;
+          font-size: 12px;
+          font-family: monospace;
         }
       `}
       </style>

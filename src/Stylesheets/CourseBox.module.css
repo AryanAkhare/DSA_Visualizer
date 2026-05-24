@@ -58,7 +58,7 @@ body {
     flex-direction: column; /* Stack text vertically */
     justify-content: center; /* Center the text vertically */
     width: 60%; /* Ensure content takes remaining space */
-    color: #333; /* Adjusted text color */
+    color: var(--text-main, #FFFFFF); /* Adjusted text color for visibility */
 }
 
 .card h3 {
@@ -66,14 +66,14 @@ body {
     margin: 0; /* Remove default margin */
     font-size: 24px; /* Adjusted font size */
     font-weight: 700; /* Bold weight for emphasis */
-    color: #333; /* Change heading color */
+    color: var(--accent-cyan, #66FCF1); /* Bright neon color for headings */
 }
 
 .card h5 {
     margin: 10px 0 0; /* Space above the paragraph */
     padding-left: 10px;
     font-size: 15px; /* Adjusted font size */
-    color: #777; /* Adjusted paragraph color */
+    color: var(--text-muted, #C5C6C7); /* Light grey for paragraphs */
     line-height: 1.4; /* Line height for readability */
 }
 

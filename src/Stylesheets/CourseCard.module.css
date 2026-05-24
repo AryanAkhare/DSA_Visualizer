@@ -1,87 +1,105 @@
 .courseCards {
   position: relative;
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
-  width: 320px;
+  width: 340px;
+  min-height: 280px;
   
+  /* Glassmorphism base */
+  background-color: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
   
-  box-shadow: 10px 25px 30px 10px rgba(41, 40, 40, 0.3);
-  background-color: black;
   padding: 32px;
   overflow: hidden;
-  border-radius: 10px;
+  border-radius: 16px;
   z-index: 1;
-  transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
-  
-  
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
 .contentWrappers {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: 20px;
-  color: #e8e8e8;
-  transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+  gap: 16px;
+  color: var(--text-main, #FFFFFF);
+  transition: all 0.4s ease;
+  height: 100%;
 }
 
 .contentWrappers .title {
-  font-weight: 700;
-  font-size: 32px;
+  font-weight: 800;
+  font-size: 28px;
+  font-family: var(--font-heading, 'Outfit');
+  margin: 0;
+  letter-spacing: 0.5px;
 }
 
 .contentWrappers .description {
-  line-height: 1.5;
+  line-height: 1.6;
+  font-family: var(--font-body, 'Inter');
+  color: var(--text-muted, #C5C6C7);
+  font-size: 15px;
+  flex-grow: 1;
+  margin: 0;
 }
 
-.contentWrappers .read{
-  color: #e8e8e8;
+.contentWrappers .read {
+  color: #ffffff;
   text-decoration: none;
-  padding: 10px;
-  margin-top: 1em;
+  padding: 10px 20px;
+  margin-top: auto;
   font-weight: 600;
+  font-family: var(--font-heading, 'Outfit');
   border: none;
   cursor: pointer;
-  background: linear-gradient(-45deg, #aa00ff 0%, #3c00ff 100%);
-  border-radius: 5px;
-  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+  background: linear-gradient(135deg, var(--accent-teal, #45A29E), var(--accent-cyan, #66FCF1));
+  border-radius: 8px;
+  box-shadow: 0 5px 15px rgba(102, 252, 241, 0.2);
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  font-size: 14px;
+  letter-spacing: 1px;
 }
 
+/* Sliding Hover Gradient Background */
 .courseCards::before {
   content: "";
   position: absolute;
   left: 0;
   bottom: 0;
-  width: 5px;
-  height: 100%;
-  background: linear-gradient(-45deg, #aa00ff 0%, #3c00ff 100%);
+  width: 100%;
+  height: 0%;
+  background: linear-gradient(180deg, transparent 0%, rgba(170, 0, 255, 0.15) 100%);
   z-index: -1;
-  transition: all 0.5s cubic-bezier(0.3, 1, 0.32, 1);
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  opacity: 0;
 }
 
 .courseCards:hover::before {
-  width: 100%;
+  height: 100%;
+  opacity: 1;
 }
 
 .courseCards:hover {
-  box-shadow: 10px 25px 30px 1px rgba(6, 83, 248, 0.3);
-  transform: translate(5px)  scale(1.05);
-  ;
+  transform: translateY(-8px) scale(1.02);
+  border-color: rgba(102, 252, 241, 0.3);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6), 0 0 20px rgba(170, 0, 255, 0.2);
 }
 
-.courseCards:hover .read{
-  color: #212121;
-  background: #e8e8e8;
+.courseCards:hover .read {
+  background: linear-gradient(135deg, var(--accent-purple, #aa00ff), #3c00ff);
+  box-shadow: 0 8px 20px rgba(170, 0, 255, 0.4);
 }
+
 .contentWrappers .read:hover {
-  outline: 2px solid #e8e8e8;
-  background: transparent;
-  color: #e8e8e8;
+  transform: translateY(-2px);
+  filter: brightness(1.1);
 }
 
 .contentWrappers .read:active {
-  box-shadow: none;
+  transform: translateY(1px);
 }
-
-

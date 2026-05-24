@@ -13,11 +13,12 @@
   .courseDetails h2 {
     font-size: 28px;
     margin: 16px 0;
+    color: var(--accent-cyan, #66FCF1);
   }
   
   .courseDetails p {
     font-size: 18px;
-    color: #000000;
+    color: var(--text-muted, #C5C6C7);
   }
   
   .courseDetails button {

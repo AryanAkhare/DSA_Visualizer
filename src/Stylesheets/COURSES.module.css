@@ -1,33 +1,35 @@
 .container {
-    background: #000000;
-    --gap: 5em;
-    --line: 1px;
-    --color: rgba(255, 255, 255, 0.2);
-  
-    background-image: linear-gradient(
-        -90deg,
-        transparent calc(var(--gap) - var(--line)),
-        var(--color) calc(var(--gap) - var(--line) + 1px),
-        var(--color) var(--gap)
-      ),
-      linear-gradient(
-        0deg,
-        transparent calc(var(--gap) - var(--line)),
-        var(--color) calc(var(--gap) - var(--line) + 1px),
-        var(--color) var(--gap)
-      );
-    background-size: var(--gap) var(--gap);
-    
-    height: 85vh;
-    z-index: -2;
+    background-color: var(--bg-main, #0B0C10);
+    /* Matching Modern Animated Mesh Background */
+    background-image: 
+      radial-gradient(circle at 15% 50%, rgba(102, 252, 241, 0.05), transparent 30%),
+      radial-gradient(circle at 85% 30%, rgba(170, 0, 255, 0.05), transparent 30%);
+    position: relative;
+    overflow: hidden;
+    min-height: 100vh;
+    padding-top: 6rem;
+    padding-bottom: 4rem;
+    z-index: 1;
 }
+
+.container::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: 
+        linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+    background-size: 50px 50px;
+    z-index: -1;
+    pointer-events: none;
+}
+
 .courseGrid {
-    display:flex;
+    display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    align-items: center; 
-    gap: 25px;
-    row-gap: 5px;
-    z-index: -2;
-    height: 85vh;
-} 
+    align-items: stretch; 
+    gap: 2.5rem;
+    padding: 0 5vw;
+    z-index: 2;
+}

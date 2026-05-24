@@ -9,7 +9,7 @@ const Aim = () => {
         margin: '20px auto',
         fontFamily: 'Roboto, sans-serif',
         lineHeight: '1.6',
-        color: '#333',
+        color: 'var(--text-main, #FFFFFF)',
     };
 
     const headingStyle = {

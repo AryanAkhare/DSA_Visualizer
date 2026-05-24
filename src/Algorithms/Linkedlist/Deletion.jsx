@@ -110,7 +110,7 @@ const Deletion = () => {
             borderRadius: '5px',
             border: '1px solid #ccc',
             color: 'white', // White text color
-            backgroundColor: '#333',
+            backgroundcolor: 'var(--text-main, #FFFFFF)',
         },
         button: {
             padding: '10px 15px',

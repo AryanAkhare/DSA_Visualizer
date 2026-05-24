@@ -28,7 +28,7 @@ const StackConcept = () => {
         fontWeight: 400,
         lineHeight: '1.6',            
         marginBottom: '8px',          
-        color: '#333',                
+        color: 'var(--text-main, #FFFFFF)',                
         listStyleType: 'disc',        
         paddingLeft: '20px',          
       };
@@ -40,7 +40,7 @@ const StackConcept = () => {
         marginBottom: '20px',
         borderRadius: '5px',
         
-        backgroundColor: '#f1f1f1',
+        backgroundColor: 'rgba(255,255,255,0.05)',
         boxShadow: '0 2px 4px 0 rgba(0, 0, 0, 0.2)',
         height:'400px',
         width:'auto',

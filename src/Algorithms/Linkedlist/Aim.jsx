@@ -8,7 +8,7 @@ const Aim = () => {
     height: '90vh',
     margin: '20px auto',
     fontFamily: "'Roboto', sans-serif", // Modern font
-    color: '#333', // Darker text color for better readability
+    color: 'var(--text-main, #FFFFFF)', // Darker text color for better readability
     overflowY: 'auto', // Allow scrolling if content overflows
     };
     const headingStyle = {

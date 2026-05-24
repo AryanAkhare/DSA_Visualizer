@@ -107,7 +107,7 @@ const Traversal = () => {
             borderRadius: '5px',
             border: '1px solid #ccc',
             color: 'white', // White text color
-            backgroundColor: '#333', // Dark background for contrast
+            backgroundcolor: 'var(--text-main, #FFFFFF)', // Dark background for contrast
         },
         button: {
             padding: '10px 15px',

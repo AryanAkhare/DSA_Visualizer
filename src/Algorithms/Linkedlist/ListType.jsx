@@ -257,7 +257,7 @@ const listStyle = {
     fontWeight: 400,
     lineHeight: '1.6',
     marginBottom: '8px',
-    color: '#333',
+    color: 'var(--text-main, #FFFFFF)',
     listStyleType: 'disc',
     paddingLeft: '20px',
 };
@@ -278,7 +278,7 @@ const imgStyle = {
     marginBottom: '20px',
     borderRadius: '5px',
     
-    backgroundColor: '#f1f1f1',
+    backgroundColor: 'rgba(255,255,255,0.05)',
     boxShadow: '0 2px 4px 0 rgba(0, 0, 0, 0.2)',
     height:'300px',
     width:'auto',
@@ -287,13 +287,13 @@ const imgStyle = {
     alignItems: 'center',
 };
 const outputStyle = {
-    backgroundColor: '#e0e0e0',
+    backgroundColor: 'rgba(255,255,255,0.1)',
     padding: '10px',
     borderRadius: '5px',
     fontFamily: 'monospace',
     whiteSpace: 'pre-line',
     boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)',
-    color: '#333',
+    color: 'var(--text-main, #FFFFFF)',
     fontSize: '16px',
     marginTop: '10px',marginRight: '12px',
     marginLeft: '15px',marginBottom: '10px',
