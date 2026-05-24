@@ -1,5 +1,5 @@
 {
-  "homepage": "https://ChaitanyaZunzurkar.github.io/DSA_Visualizer",
+  "homepage": "https://AryanAkhare.github.io/DSA_Visualizer",
   "name": "dsa-visualizer",
   "private": true,
   "version": "0.0.0",
@@ -20,7 +20,7 @@
     "prismjs": "^1.29.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
-    "react-icons": "^5.3.0",
+    "react-icons": "^5.6.0",
     "react-router-dom": "^6.26.1",
     "styled-components": "^6.1.13"
   },
